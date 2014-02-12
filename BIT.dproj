@@ -1,0 +1,250 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{221E40A1-972C-44B0-9869-5C3C1CC417D8}</ProjectGuid>
+			<ProjectVersion>12.0</ProjectVersion>
+			<MainSource>BIT.dpr</MainSource>
+			<Config Condition="'$(Config)'==''">Release</Config>
+			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<BRCC_IncludePath>C:\Program Files\FastReport\Source;$(BRCC_IncludePath)</BRCC_IncludePath>
+			<DCC_UsePackage>vclx;vcl;dbrtl;bdertl;rtl;vclactnband;vcldb;vcldbx;dsnap;dsnapcon;adortl;vclib;ibxpress;IndyCore;IndySystem;xmlrtl;VclSmp;vclribbon;dbexpress;DbxCommonDriver;DataSnapIndy10ServerTransport;DataSnapProviderClient;DataSnapServer;DbxClientDriver;DBXInterBaseDriver;DBXMySQLDriver;dbxcds;DBXSybaseASEDriver;DBXSybaseASADriver;DBXOracleDriver;DBXMSSQLDriver;DBXInformixDriver;DBXDb2Driver;acnt2009_R;AlphaDB2009;madBasic_;madDisAsm_;madExcept_;dxCoreRS12;cxLibraryRS12;dxGDIPlusRS12;dxThemeRS12;cxEditorsRS12;cxDataRS12;cxExtEditorsRS12;dxBarRS12;dxComnRS12;dxBarDBNavRS12;dxBarExtDBItemsRS12;dxBarExtItemsRS12;dxRibbonRS12;cxBarEditItemRS12;dxdbtrRS12;dxtrmdRS12;dxmdsRS12;dxDockingRS12;dxFlowChartRS12;cxPageControlRS12;dxLayoutControlRS12;dxNavBarRS12;dxorgcRS12;dxdborRS12;cxGridRS12;cxExportRS12;cxPivotGridRS12;cxPivotGridChartRS12;cxPivotGridOLAPRS12;cxTreeListRS12;cxTreeListdxBarPopupMenuRS12;cxSchedulerRS12;cxSchedulerGridRS12;dxsbRS12;dcldxSkinsCoreRS12;dxSkinsCoreRS12;dxSkinscxPCPainterRS12;dxSkinscxScheduler3PainterRS12;dxSkinsdxDLPainterRS12;dxSkinsdxBarPainterRS12;dxSkinsdxNavBar2PainterRS12;dxSpellCheckerRS12;cxSpreadSheetRS12;cxVerticalGridRS12;dxPSCoreRS12;dxPSLnksRS12;dxPScxCommonRS12;dxPScxExtCommonRS12;dxPScxGrid6LnkRS12;dxPScxPivotGrid2LnkRS12;dxPScxScheduler3LnkRS12;dxPScxSSLnkRS12;dxPScxTL5LnkRS12;dxPScxVGridLnkRS12;dxPSTeeChartRS12;dxPSDBTeeChartRS12;dxPSdxOCLnkRS12;dxPSdxDBOCLnkRS12;dxPSdxDBTVLnkRS12;dxPSdxFCLnkRS12;dxPSdxLC2LnkRS12;dxPScxPCProdRS12;dxPsPrVwAdvRS12;dxPSPrVwRibbonRS12;dxSkinsdxRibbonPainterRS12;dxSkinXmas2008BlueRS12;dxSkinBlackRS12;dxSkinBlueRS12;dxSkinCaramelRS12;dxSkinCoffeeRS12;dxSkinDarkRoomRS12;dxSkinDarkSideRS12;dxSkinFoggyRS12;dxSkinGlassOceansRS12;dxSkiniMaginaryRS12;dxSkinLilianRS12;dxSkinLiquidSkyRS12;dxSkinLondonLiquidSkyRS12;dxSkinMcSkinRS12;dxSkinMoneyTwinsRS12;dxSkinOffice2007BlackRS12;dxSkinOffice2007BlueRS12;dxSkinOffice2007GreenRS12;dxSkinOffice2007PinkRS12;dxSkinOffice2007SilverRS12;dxSkinOffice2010BlackRS12;dxSkinOffice2010BlueRS12;dxSkinOffice2010SilverRS12;dxSkinPumpkinRS12;dxSkinSevenRS12;dxSkinSharpRS12;dxSkinSilverRS12;dxSkinSpringTimeRS12;dxSkinStardustRS12;dxSkinSummer2008RS12;dxSkinValentineRS12;TeeUI;TeeDB;Tee</DCC_UsePackage>
+			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;$(DCC_UnitAlias)</DCC_UnitAlias>
+			<DCC_DependencyCheckOutputName>BIT.exe</DCC_DependencyCheckOutputName>
+			<DCC_ImageBase>00400000</DCC_ImageBase>
+			<DCC_Platform>x86</DCC_Platform>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<BRCC_OutputDir>dcu</BRCC_OutputDir>
+			<DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_DebugInformation>false</DCC_DebugInformation>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<DCC_DcuOutput>dcu</DCC_DcuOutput>
+			<DCC_DcpOutput>dcu</DCC_DcpOutput>
+			<DCC_RangeChecking>true</DCC_RangeChecking>
+			<BRCC_OutputDir>dcu</BRCC_OutputDir>
+			<DCC_IntegerOverflowCheck>true</DCC_IntegerOverflowCheck>
+			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+		</PropertyGroup>
+		<ItemGroup>
+			<DelphiCompile Include="BIT.dpr">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<DCCReference Include="DataModule.pas">
+				<Form>MainDM</Form>
+			</DCCReference>
+			<DCCReference Include="Main.pas">
+				<Form>MainForm</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="GUIIdentification.pas">
+				<Form>IdentForm</Form>
+			</DCCReference>
+			<DCCReference Include="TypesAndConstants.pas"/>
+			<DCCReference Include="GUILogoForm.pas">
+				<Form>LogoForm</Form>
+			</DCCReference>
+			<DCCReference Include="GUIMaterial.pas">
+				<Form>MaterialForm</Form>
+			</DCCReference>
+			<DCCReference Include="GUITransporterForm.pas">
+				<Form>TransporterForm</Form>
+			</DCCReference>
+			<DCCReference Include="GUIListForm.pas">
+				<Form>ListForm</Form>
+			</DCCReference>
+			<DCCReference Include="GUIMessageForm.pas">
+				<Form>MessageForm</Form>
+			</DCCReference>
+			<DCCReference Include="GUIReportForm.pas">
+				<Form>ReportForm</Form>
+			</DCCReference>
+			<DCCReference Include="GUIBuyingReportForm.pas">
+				<Form>BuyingReportForm</Form>
+			</DCCReference>
+			<DCCReference Include="GUITranspReportForm.pas">
+				<Form>TranspReportForm</Form>
+			</DCCReference>
+			<DCCReference Include="GUIManagerReportForm.pas">
+				<Form>ManagerReportForm</Form>
+			</DCCReference>
+			<DCCReference Include="PlansFrame.pas">
+				<Form>PlanFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="VinnikFrame.pas">
+				<Form>VFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="GUIPlanForm.pas">
+				<Form>PlanForm</Form>
+			</DCCReference>
+			<DCCReference Include="MainFrame.pas">
+				<Form>MainDataFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="ReportCreator.pas"/>
+			<DCCReference Include="GUIPoint5ReportForm.pas">
+				<Form>Point5ReportForm</Form>
+			</DCCReference>
+			<DCCReference Include="GUIPlanGraph.pas">
+				<Form>PlanGraphForm</Form>
+			</DCCReference>
+			<DCCReference Include="GUIPrivilegeForm.pas">
+				<Form>PrivilegeForm</Form>
+			</DCCReference>
+			<DCCReference Include="FinancesFrame.pas">
+				<Form>FinanceFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="ProfitsFrame.pas">
+				<Form>ProfitFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="ClearProfitsFrame.pas">
+				<Form>Frame1</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="FinanceExpFrame.pas">
+				<Form>FinExpFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="InvestmentExpFrame.pas">
+				<Form>InvestExpFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="GUISalFrame.pas">
+				<Form>SalFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="ExpensesFrame.pas">
+				<Form>ExpFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="ExpPercentGraph.pas">
+				<Form>ExpGraphForm</Form>
+			</DCCReference>
+			<DCCReference Include="GraphSaleProfit.pas">
+				<Form>SaleProfitGraphForm</Form>
+			</DCCReference>
+			<DCCReference Include="GraphFinProfit.pas">
+				<Form>FinGraphForm</Form>
+			</DCCReference>
+			<DCCReference Include="GraphCommonProfit.pas">
+				<Form>CommonProfitGraphForm</Form>
+			</DCCReference>
+			<DCCReference Include="GraphExpenses.pas">
+				<Form>ExpensesGraphForm</Form>
+			</DCCReference>
+			<DCCReference Include="GraphClearProfit.pas">
+				<Form>ClearProfitGraphForm</Form>
+			</DCCReference>
+			<DCCReference Include="GUIReportAVGForm.pas">
+				<Form>AVGReportForm</Form>
+			</DCCReference>
+			<DCCReference Include="CashesOrgFrame.pas">
+				<Form>CashOrgFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="CashesPlacesFrame.pas">
+				<Form>CashPlacesFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="CashesTranspFrame.pas">
+				<Form>CashTranspFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="GUICapitalFrame.pas">
+				<Form>CapitalFrame</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="CashesForm.pas">
+				<Form>CashForm</Form>
+			</DCCReference>
+			<DCCReference Include="GraphCommonProfitFinances.pas">
+				<Form>CommonProfitGraphFormFinances</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="GraphCommonProfitSand.pas">
+				<Form>CommonProfitGraphFormSand</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Delphi.Personality>
+					<Source>
+						<Source Name="MainSource">BIT.dpr</Source>
+					</Source>
+					<Parameters>
+						<Parameters Name="UseLauncher">False</Parameters>
+						<Parameters Name="LoadAllSymbols">True</Parameters>
+						<Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+					</Parameters>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">True</VersionInfo>
+						<VersionInfo Name="MajorVer">1</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">1</VersionInfo>
+						<VersionInfo Name="Build">216</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">1049</VersionInfo>
+						<VersionInfo Name="CodePage">1251</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName"/>
+						<VersionInfoKeys Name="FileDescription"/>
+						<VersionInfoKeys Name="FileVersion">1.0.1.216</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName"/>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename"/>
+						<VersionInfoKeys Name="ProductName"/>
+						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+					</VersionInfoKeys>
+					<Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\RaveReports\Lib\dclRave.bpl">Rave Reports 7.6 BE Package</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\dcloffice2k120.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\dclofficexp120.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+					</Excluded_Packages>
+				</Delphi.Personality>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+	</Project>
