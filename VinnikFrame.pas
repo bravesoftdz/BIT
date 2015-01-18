@@ -137,11 +137,11 @@ begin
 end;
 
 procedure TVFrame.dxBarButton1Click(Sender: TObject);
-var BD,ED:TDateTime;
+//var BD,ED:TDateTime;
 begin
   try
-    BD:=StrToDateTime(DateTimeToStr(now)+' 00:00:00');
-    ED:=StrToDateTime(DateTimeToStr(now)+' 23:59:59');
+   // BD:=StrToDateTime(DateTimeToStr(now)+' 00:00:00');
+   // ED:=StrToDateTime(DateTimeToStr(now)+' 23:59:59');
     VinnikView.DataController.Filter.Root.Clear;
   //  VinnikView.DataController.Filter.Root.AddItem(VinnikViewVTransactDate,foGreaterEqual,BD,'');
     VinnikView.DataController.Filter.Root.AddItem(VinnikViewVTransactDate,foLessEqual,now,'');
@@ -168,7 +168,6 @@ begin
 end;
 
 procedure TVFrame.InsertVTransactBtnClick(Sender: TObject);
-var RecCount,RecIndex:integer;
 begin
    try
      VinnikView.DataController.Insert;

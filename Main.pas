@@ -116,7 +116,6 @@ type
     ExpensesTab: TdxRibbonTab;
     PageControl: TcxPageControl;
     MainPage: TcxTabSheet;
-    MainDataFrame: TMainDataFrame;
     PlanPage: TcxTabSheet;
     VinnikPage: TcxTabSheet;
     VFrame: TVFrame;
@@ -226,6 +225,7 @@ type
     ClearProfitsFinGraphBtn: TdxBarLargeButton;
     CommonProfitFinancesGraphFrame: TCommonProfitGraphFormFinances;
     CommonProfitSandGraphFrame: TCommonProfitGraphFormSand;
+    MainDataFrame: TMainDataFrame;
     procedure N2Click(Sender: TObject);
     procedure MMOrgListBtnClick(Sender: TObject);
     procedure BeginDateEditPropertiesEditValueChanged(Sender: TObject);

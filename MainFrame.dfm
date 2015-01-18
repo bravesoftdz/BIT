@@ -80,6 +80,7 @@ object MainDataFrame: TMainDataFrame
         DataBinding.FieldName = 'TransactDate'
         PropertiesClassName = 'TcxDateEditProperties'
         Properties.DateButtons = [btnToday]
+        Properties.OnEditValueChanged = EditValueChanged
         HeaderAlignmentHorz = taCenter
         Options.Filtering = False
         Width = 54
@@ -199,11 +200,11 @@ object MainDataFrame: TMainDataFrame
         Properties.KeyFieldNames = 'ID'
         Properties.ListColumns = <
           item
-            FieldName = 'PaymentName'
+            FieldName = 'PaymentTypeMatName'
           end>
         Properties.ListOptions.ShowHeader = False
-        Properties.ListSource = MainDM.PaymenttypsDS
-        Properties.OnEditValueChanged = MainGridViewPaymentTypePropertiesEditValueChanged
+        Properties.ListSource = MainDM.PaymentTypesMatDS
+        Properties.OnEditValueChanged = EditValueChanged
         HeaderAlignmentHorz = taCenter
         Options.Filtering = False
       end
@@ -227,7 +228,7 @@ object MainDataFrame: TMainDataFrame
         Caption = #1058#1072#1088#1080#1092
         DataBinding.FieldName = 'TransporterPrice'
         PropertiesClassName = 'TcxMaskEditProperties'
-        Properties.OnEditValueChanged = EditValueChanged
+        Properties.OnEditValueChanged = MainGridViewTransporterPricePropertiesEditValueChanged
         HeaderAlignmentHorz = taCenter
         Options.Filtering = False
         Width = 45
@@ -242,11 +243,26 @@ object MainDataFrame: TMainDataFrame
         Caption = #1057#1090#1086#1080#1084#1086#1089#1090#1100' '#1087#1077#1088#1077#1074#1086#1079#1082#1080
         DataBinding.FieldName = 'TransporterCost'
         PropertiesClassName = 'TcxMaskEditProperties'
-        Properties.OnEditValueChanged = EditValueChanged
+        Properties.OnEditValueChanged = MainGridViewTransporterCostPropertiesEditValueChanged
         OnGetPropertiesForEdit = MainGridViewTransporterCostGetPropertiesForEdit
         HeaderAlignmentHorz = taCenter
         Options.Filtering = False
         Width = 45
+      end
+      object MainGridViewTranspPaymentType: TcxGridDBColumn
+        Caption = #1058#1080#1087' '#1086#1087#1083#1072#1090#1099' '#1087#1077#1088#1077#1074#1086#1079#1082#1080
+        DataBinding.FieldName = 'PaymentTypesTransp'
+        PropertiesClassName = 'TcxLookupComboBoxProperties'
+        Properties.DropDownListStyle = lsFixedList
+        Properties.ImmediatePost = True
+        Properties.KeyFieldNames = 'ID'
+        Properties.ListColumns = <
+          item
+            FieldName = 'PaymentTypeMatName'
+          end>
+        Properties.ListOptions.ShowHeader = False
+        Properties.ListSource = MainDM.PaymentTypesMatDS
+        Properties.OnEditValueChanged = EditValueChanged
       end
       object MainGridViewSpecial: TcxGridDBColumn
         Caption = #1054#1089#1086#1073#1086#1077

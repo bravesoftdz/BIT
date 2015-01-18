@@ -165,7 +165,6 @@ object CashPlacesFrame: TCashPlacesFrame
       Category = 0
       Hint = 'New Button'
       Visible = ivAlways
-      OnClick = dxBarButton1Click
     end
   end
   object CashPlaceQR: TADOQuery

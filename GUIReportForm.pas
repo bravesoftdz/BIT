@@ -54,6 +54,7 @@ implementation
 function TReportForm.ShowChoose(var BeginDate: TDateTime; var EndDate: TDateTime;
   var OrgID: integer; var MngId: integer): integer;
 begin
+  Result:=mrNone;
   OrgsCB.Visible:=True;
   OrgLbl.Visible:=True;
   BeginDateEdit.EditValue:=FormatDateTime('dd.mm.yyyy',BeginDate);

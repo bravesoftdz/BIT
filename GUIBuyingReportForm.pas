@@ -48,6 +48,7 @@ implementation
 function TBuyingReportForm.ShowChoose(var BeginDate: TDateTime; var EndDate: TDateTime;
   var PlaceID: integer; var TypeReport:integer): integer;
 begin
+  Result:=mrNone;
   PlaceComboBox.Visible:=True;
   OrgLbl.Visible:=True;
   BeginDateEdit.EditValue:=FormatDateTime('dd.mm.yyyy',BeginDate);

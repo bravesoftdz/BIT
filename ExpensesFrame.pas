@@ -130,11 +130,8 @@ begin
 end;
 
 procedure TExpFrame.dxBarButton1Click(Sender: TObject);
-var BD,ED:TDateTime;
 begin
   try
-    BD:=StrToDateTime(DateTimeToStr(now)+' 00:00:00');
-    ED:=StrToDateTime(DateTimeToStr(now)+' 23:59:59');
     ExpView.DataController.Filter.Root.Clear;
     ExpView.DataController.Filter.Root.AddItem(ExpViewExpenseDate,foLessEqual,now,'');
     ExpView.DataController.Filter.Active:=True;

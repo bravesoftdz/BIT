@@ -54,8 +54,7 @@ object MainForm: TMainForm
           inherited MainGrid: TcxGrid
             Width = 1051
             Height = 421
-            ExplicitWidth = 1051
-            ExplicitHeight = 421
+            TabOrder = 4
             inherited MainGridView: TcxGridDBTableView
               DataController.Summary.FooterSummaryItems = <
                 item
@@ -74,23 +73,11 @@ object MainForm: TMainForm
                   Column = MainDataFrame.MainGridViewManagerProfit
                 end
                 item
-                  Format = '0'
-                  Kind = skAverage
-                  FieldName = 'Rent'
-                  Column = MainDataFrame.MainGridViewRent
-                end
-                item
                   Kind = skSum
                   Column = MainDataFrame.MainGridViewSaleProfit
                 end>
-              inherited MainGridViewBlocked: TcxGridDBColumn
-                Properties.Images = nil
-                Properties.LargeImages = nil
-                Properties.ReadOnly = True
-                Properties.ShowDescriptions = True
-              end
-              inherited MainGridViewManagerID: TcxGridDBColumn
-                Options.Filtering = True
+              inherited MainGridViewTransactDate: TcxGridDBColumn
+                Properties.OnEditValueChanged = nil
               end
             end
           end
@@ -104,23 +91,6 @@ object MainForm: TMainForm
               0
               26
               0)
-          end
-          inherited ActionList1: TActionList
-            inherited InsertMainTransact: TAction
-              OnExecute = nil
-            end
-            inherited UpdateData: TAction
-              OnExecute = nil
-            end
-            inherited CopyMainTransact: TAction
-              OnExecute = nil
-            end
-            inherited DeleteMainTransact: TAction
-              OnExecute = nil
-            end
-            inherited AppendRecord: TAction
-              OnExecute = nil
-            end
           end
           inherited cxImageList1: TcxImageList
             FormatVersion = 1

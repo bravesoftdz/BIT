@@ -43,6 +43,7 @@ implementation
 function TTranspReportForm.ShowChoose(var BeginDate: TDateTime; var EndDate: TDateTime;
   var TranspID: integer): integer;
 begin
+  Result:=mrNone;
   BeginDateEdit.EditValue:=FormatDateTime('dd.mm.yyyy',BeginDate);
   EndDateEdit.EditValue:=FormatDateTime('dd.mm.yyyy',EndDate);
   if ShowModal = mrOK then

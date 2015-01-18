@@ -48,6 +48,7 @@ implementation
 function TManagerReportForm.ShowAdminChoose(var BeginDate: TDateTime; var EndDate: TDateTime;
   var PlaceID: integer; var TypeReport:integer): integer;
 begin
+  Result:=mrNone;
   try
     ManagerComboBox.Visible:=True;
     TypeComboBox.Visible:=True;
@@ -78,6 +79,7 @@ end;
 function TManagerReportForm.ShowUserChoose(var BeginDate: TDateTime;
                                  var EndDate: TDateTime): integer;
 begin
+  Result:=mrNone;
   ManagerComboBox.Visible:=False;
   TypeComboBox.Visible:=False;
   OrgLbl.Visible:=False;

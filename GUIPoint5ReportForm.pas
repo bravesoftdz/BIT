@@ -37,6 +37,7 @@ implementation
 
 function TPoint5ReportForm.ShowChoose(var BeginDate: TDateTime; var EndDate: TDateTime): integer;
 begin
+  Result:=mrNone;
   BeginDateEdit.EditValue:=FormatDateTime('dd.mm.yyyy',BeginDate);
   EndDateEdit.EditValue:=FormatDateTime('dd.mm.yyyy',EndDate);
   if ShowModal = mrOK then

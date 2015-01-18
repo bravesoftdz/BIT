@@ -47,7 +47,6 @@ var Query:TADOQuery;
     TempResult:double;
     i:integer;
 begin
-  TempResult:=0;
   Query:=TADOQuery.Create(self);
   try
    try
@@ -110,8 +109,7 @@ begin
 end;
 
 procedure TProfitFrame.RefreshGraph;
-var ChSeries:TChartSeries;
-    i:integer;
+var i:integer;
     AYear,AMonth,ADay : word;
     year :integer;
 begin

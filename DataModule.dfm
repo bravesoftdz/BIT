@@ -148,6 +148,9 @@ object MainDM: TMainDM
       Properties.ListOptions.ShowHeader = False
       Properties.ListSource = VMaterialsDS
     end
+    object PaymentTypesMaterial: TcxEditRepositoryLookupComboBoxItem
+      Properties.ListColumns = <>
+    end
   end
   object MaterialsQuery: TADOQuery
     Connection = DBConnect
@@ -284,6 +287,9 @@ object MainDM: TMainDM
       currency = True
       Precision = 15
       Size = 2
+    end
+    object MainQueryPaymentTypesTransp: TIntegerField
+      FieldName = 'PaymentTypesTransp'
     end
   end
   object MainDS: TDataSource
@@ -43497,5 +43503,27 @@ object MainDM: TMainDM
     DataSet = ManagersQR
     Left = 472
     Top = 408
+  end
+  object PaymentTypesMatDS: TDataSource
+    DataSet = PaymentTypesMatQR
+    Left = 480
+    Top = 224
+  end
+  object PaymentTypesMatQR: TADOQuery
+    Connection = DBConnect
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'Select * from PaymentTypesMaterial')
+    Left = 480
+    Top = 280
+    object PaymentTypesMatQRID: TAutoIncField
+      FieldName = 'ID'
+      ReadOnly = True
+    end
+    object PaymentTypesMatQRPaymentTypeMatName: TWideStringField
+      FieldName = 'PaymentTypeMatName'
+      Size = 50
+    end
   end
 end

@@ -60,7 +60,6 @@ object ReportForm: TReportForm
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitHeight = 97
     object BeginDateEdit: TcxDateEdit
       Left = 88
       Top = 11

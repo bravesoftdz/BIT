@@ -176,8 +176,7 @@ begin
 end;
 
 procedure TFinanceFrame.RefreshGraph;
-var ChSeries:TChartSeries;
-    i:integer;
+var i:integer;
     AYear,AMonth,ADay : word;
     year :integer;
 begin

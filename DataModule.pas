@@ -214,6 +214,12 @@ type
     MainQueryCommonProfitMng: TBCDField;
     MainQueryRentReal: TFloatField;
     MainQueryBuyingCost: TBCDField;
+    MainQueryPaymentTypesTransp: TIntegerField;
+    PaymentTypesMaterial: TcxEditRepositoryLookupComboBoxItem;
+    PaymentTypesMatDS: TDataSource;
+    PaymentTypesMatQR: TADOQuery;
+    PaymentTypesMatQRID: TAutoIncField;
+    PaymentTypesMatQRPaymentTypeMatName: TWideStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
     procedure MainQueryBeforePost(DataSet: TDataSet);
@@ -292,6 +298,7 @@ begin
     UsertypesQR.Open;
     UnitsQR.Open;
     PaymenttypeQR.Open;
+    PaymentTypesMatQR.Open;
     CommonPlansQR.Open;
     ExpQuery.Open;
     SalaryQuery.Open;
@@ -326,6 +333,7 @@ begin
     UsertypesQR.Close;
     UnitsQR.Close;
     PaymenttypeQR.Close;
+    PaymentTypesMatQR.Close;
     CommonPlansQR.Close;
     ExpQuery.Close;
     SalaryQuery.Close;

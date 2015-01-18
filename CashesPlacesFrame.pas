@@ -46,14 +46,12 @@ type
     procedure VinnikViewStylesGetContentStyle(Sender: TcxCustomGridTableView;
       ARecord: TcxCustomGridRecord; AItem: TcxCustomGridTableItem;
       out AStyle: TcxStyle);
-    procedure dxBarButton1Click(Sender: TObject);
   private
     FEditable:boolean;
     FIniFileName:string;
     Style1,Style2:TcxStyle;
     FBeginDate,FEndDate:TDate;
     FFilterDif: boolean;
-    function GetEditValue(Source:variant):variant;
     function GetFocusedRecordID: integer;
     procedure SetFEditable(const Value: boolean);
     function GetSelectedID: integer;
@@ -119,12 +117,6 @@ begin
   inherited;
 end;
 
-procedure TCashPlacesFrame.dxBarButton1Click(Sender: TObject);
-var BD,ED:TDateTime;
-begin
-
-end;
-
 procedure TCashPlacesFrame.dxBarButton2Click(Sender: TObject);
 begin
   if FocusedRecordID>-1 then
@@ -149,7 +141,6 @@ begin
 end;
 
 procedure TCashPlacesFrame.InsertVTransactBtnClick(Sender: TObject);
-var RecCount,RecIndex:integer;
 begin
   ShowNew;
 end;
@@ -181,7 +172,6 @@ begin
 end;
 
 procedure TCashPlacesFrame.ShowByDates(BeginDate, EndDate: TDate);
-var BD,ED:TDateTime;
 begin
  FBeginDate := BeginDate;
  FEndDate := EndDate;
@@ -223,14 +213,6 @@ procedure TCashPlacesFrame.UpdateDataBtnClick(Sender: TObject);
 begin
   CashPlaceQR.Close;
   CashPlaceQR.Open;
-end;
-
-function TCashPlacesFrame.GetEditValue(Source:variant):variant;
-begin
-  if not varisnull(source) then
-    Result:= source
-  else
-    Result:=0;
 end;
 
 end.

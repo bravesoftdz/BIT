@@ -66,8 +66,7 @@ implementation
 
 
 constructor TCapitalFrame.Create(AOwner: TComponent);
-var Abut,Abut2,Abut3,ABut4:TcxEditButton;
-    i:integer;
+var i:integer;
 begin
   inherited;
   Style1:=TcxStyle.Create(self);
@@ -105,8 +104,7 @@ begin
 end;
 
 procedure TCapitalFrame.ShowByYear(Year:integer);
-var BD,ED:TDateTime;
-    i:integer;
+var i:integer;
 begin
   try
     MainDM.CapitalQR.Close;
@@ -114,10 +112,6 @@ begin
       MainDM.CapitalQR.Parameters[i].Value := Year;
     MainDM.CapitalQR.Open;
 
-   { if ChartQR.Active then
-    ChartQR.Close;
-    ChartQR.Parameters[0].Value := Year;
-    ChartQR.Open; }
     MainDM.CapitalQR.Last;
     Series1.Clear;
 
@@ -148,11 +142,9 @@ end;
 
 procedure TCapitalFrame.Calculate(Year:integer);
 var Query:TADOQuery;
-    TempResult:double;
     i:integer;
     sand,finances,expenses: double;
 begin
-  TempResult:=0;
   Query:=TADOQuery.Create(self);
   try
    try

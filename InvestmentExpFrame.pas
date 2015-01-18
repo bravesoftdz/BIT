@@ -95,8 +95,6 @@ begin
 end;
 
 constructor TInvestExpFrame.Create(AOwner: TComponent);
-var Abut,Abut2,Abut3,ABut4:TcxEditButton;
-    i:integer;
 begin
   inherited;
   Style1:=TcxStyle.Create(self);
@@ -126,11 +124,8 @@ begin
 end;
 
 procedure TInvestExpFrame.dxBarButton1Click(Sender: TObject);
-var BD,ED:TDateTime;
 begin
   try
-    BD:=StrToDateTime(DateTimeToStr(now)+' 00:00:00');
-    ED:=StrToDateTime(DateTimeToStr(now)+' 23:59:59');
     InvExpView.DataController.Filter.Root.Clear;
     InvExpView.DataController.Filter.Root.AddItem(InvExpViewInvExpDate,foLessEqual,now,'');
     InvExpView.DataController.Filter.Active:=True;
@@ -156,7 +151,6 @@ begin
 end;
 
 procedure TInvestExpFrame.InsertVTransactBtnClick(Sender: TObject);
-var RecCount,RecIndex:integer;
 begin
    try
       InvExpView.DataController.Insert;

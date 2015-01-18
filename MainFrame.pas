@@ -65,6 +65,7 @@ type
     MainGridViewCommonProfitMng: TcxGridDBColumn;
     MainGridViewRentReal: TcxGridDBColumn;
     MainGridViewBuyingCost: TcxGridDBColumn;
+    MainGridViewTranspPaymentType: TcxGridDBColumn;
     procedure MainGridViewStylesGetContentStyle(Sender: TcxCustomGridTableView;
       ARecord: TcxCustomGridRecord; AItem: TcxCustomGridTableItem;
       out AStyle: TcxStyle);
@@ -88,6 +89,10 @@ type
     procedure MainGridViewBuyingCostGetPropertiesForEdit(
       Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;
       var AProperties: TcxCustomEditProperties);
+    procedure MainGridViewTransporterCostPropertiesEditValueChanged(
+      Sender: TObject);
+    procedure MainGridViewTransporterPricePropertiesEditValueChanged(
+      Sender: TObject);
   private
     FEditable:boolean;
     FIniFileName:string;
@@ -305,6 +310,13 @@ begin
   // AProperties.ReadOnly := not MainDM.MainQueryTransporterPrice.IsNull;
 end;
 
+procedure TMainDataFrame.MainGridViewTransporterCostPropertiesEditValueChanged(
+  Sender: TObject);
+begin
+  MainGridViewTransporterPrice.EditValue:=0;
+  EditValueChanged(Sender);
+end;
+
 procedure TMainDataFrame.MainGridViewTransporterIDPropertiesEditValueChanged(
   Sender: TObject);
 begin
@@ -320,6 +332,13 @@ begin
     on e:exception do
       MainDM.MessageForm.ShowError('Ошибка: '+e.message);
   end;
+end;
+
+procedure TMainDataFrame.MainGridViewTransporterPricePropertiesEditValueChanged(
+  Sender: TObject);
+begin
+  MainGridViewTransporterCost.EditValue:=0;
+  EditValueChanged(Sender);
 end;
 
 procedure TMainDataFrame.MaterialPropertiesClick(Sender: TObject;AButtonIndex: Integer);
@@ -537,6 +556,7 @@ begin
      MainGridViewBuyingUnitID.EditValue:=1;
      MainGridViewPaymentType.EditValue:=2;
      MainGridViewMatPaymentType.EditValue:=2;
+     MainGridViewTranspPaymentType.EditValue:=2;
      MainGridViewManagerID.EditValue:=MainDM.CurrentUser.ID;
      MainGridViewManagerPercent.EditValue:=MainDM.CurrentUser.Percent;
      MainGridView.DataController.PostEditingData;
@@ -561,11 +581,17 @@ var CommonProfit,ManagerProfit:double;
     SaleProfit,ManagerPercent:double;
     SalePrice,SaleVolume:double;
     BuyingPrice,BuyingVolume,TransporterPrice:double;
-    PaymentType,MatPaymentType:integer;
+    PaymentType,MatPaymentType,TranspPaymentType:integer;
     TransporterCost,SpecialCost,TransporterCostReal:double;
     BuyingTotalCost,BuyingTotalCostReal:double;
-    BuyingPriceReal,TransporterPriceReal,CommonProfitMng,RentReal:double;
+    BuyingPriceReal,TransporterPriceReal,CommonProfitMng:double;
+    TransactDate: tdatetime;
+    DateX: tdatetime;
+    Tax: double;
+    TPIndexMat:double;
+    TPIndexTransp:double;
 begin
+
   SalePrice:= GetEditValue(MainGridViewSalePrice.EditValue);
   SaleVolume:= GetEditValue(MainGridViewSaleVolume.EditValue);
   BuyingPrice:= GetEditValue(MainGridViewBuyingPrice.EditValue);
@@ -579,6 +605,12 @@ begin
   SpecialCost:= GetEditValue(MainGridViewSpecial.EditValue);
   TransporterCost:=GetEditValue(MainGridViewTransporterCost.EditValue);
   BuyingTotalCost:=GetEditValue(MainGridViewBuyingCost.EditValue);
+  TransactDate := StrToDateTime(GetEditValue(MainGridViewTransactDate.EditValue));
+  TranspPaymentType:= GetEditValue(MainGridViewTranspPaymentType.EditValue);
+  TransporterCostReal := 0;
+  DateX := EncodeDate(2015, 1, 1);
+  if TransactDate < DateX then
+  begin
 
   if PaymentType=1 then
     TPIndex:=0       // нал
@@ -587,13 +619,14 @@ begin
 
   SaleProfit:=SalePrice*SaleVolume-TPIndex*(SalePrice*SaleVolume);
 
+  // могут ввести цену или стоимость
+  // поэтому расчитываем или то, или другое
   if (BuyingTotalCost <> 0) then
   begin
-
     if (BuyingPrice = 0) and (BuyingVolume <> 0) then
     begin
-    BuyingPrice := roundto(BuyingTotalCost/BuyingVolume,-2);
-    MainGridViewBuyingPrice.EditValue:=BuyingPrice;
+      BuyingPrice := roundto(BuyingTotalCost/BuyingVolume,-2);
+      MainGridViewBuyingPrice.EditValue:=BuyingPrice;
     end;
   end
   else
@@ -602,8 +635,7 @@ begin
 
      if MatPaymentType = 2 then // безнал
      begin
-      BuyingTotalCost:=BuyingTotalCost-TPIndex*BuyingTotalCost;
-      BuyingTotalCostReal:=BuyingTotalCostReal-TPIndex*BuyingTotalCostReal;
+       BuyingTotalCost:=BuyingTotalCost-TPIndex*BuyingTotalCost;
      end;
   end;
 
@@ -646,6 +678,103 @@ begin
     MainGridViewRent.EditValue:=round(CommonProfitMng*10000/(SalePrice*SaleVolume))/100
   else
     MainGridViewRent.EditValue:=0;
+
+  end
+  else
+  // Новый расчет с 1 января 2015
+  begin
+
+    TPIndex := 1;
+    TPIndexMat := 1;
+    TPIndexTransp := 1;
+    Tax := 0;
+
+    //1. нал - никаких коэффициентов и налогов
+
+    //2. безнал c НДС коэфф-т + налог
+    if PaymentType = 2 then
+    begin
+       TPIndex := 1- 18/118;
+       if MatPaymentType = 2 then
+         TPIndexMat := 1- 18/118;
+       if TranspPaymentType = 2 then
+         TPIndexTransp := 1- 18/118;
+
+       Tax := 20/100;
+    end;
+
+     // безнал без НДС только налог
+    if PaymentType = 3 then
+    begin
+       Tax := 15/100;
+    end;
+
+    // Сумма Продажи
+    SaleProfit:=SalePrice*SaleVolume*TPIndex;
+
+    // Сумма Покупки
+    // могут ввести цену или стоимость
+    // поэтому расчитываем или то, или другое
+    if (BuyingTotalCost <> 0) then
+    begin
+      if (BuyingPrice = 0) and (BuyingVolume <> 0) then
+      begin
+        BuyingPrice := roundto(BuyingTotalCost/BuyingVolume,-2);
+        MainGridViewBuyingPrice.EditValue:=BuyingPrice;
+      end;
+    end
+    else
+    begin
+       BuyingTotalCost:=BuyingPrice*BuyingVolume*TPIndexMat;
+    end;
+
+    BuyingTotalCostReal:=BuyingPriceReal*BuyingVolume;
+    if BuyingTotalCostReal = 0 then
+       BuyingTotalCostReal := BuyingTotalCost;
+
+
+     // Сумма Транспортировки
+
+    if TransporterPrice <> 0 then
+    // если задана стоимость
+    begin
+      TransporterCost:=TransporterPrice*SaleVolume*TPIndexTransp;
+    end
+    else
+      // если задана цена
+      begin
+      // почему не учитываем коэфф-т?
+        if SaleVolume > 0 then
+           MainGridViewTransporterPrice.EditValue:=roundto((TransporterCost/SaleVolume),-2);
+      end;
+
+   if (TransporterPriceReal <> 0) then
+    TransporterCostReal:=TransporterPriceReal*SaleVolume;
+   if (TransporterCostReal = 0) then
+     TransporterCostReal := TransporterCost;
+
+   CommonProfit:=SaleProfit-BuyingTotalCostReal-TransporterCostReal-SpecialCost;
+   CommonProfit:= CommonProfit - Tax*CommonProfit;
+   CommonProfitMng:=SaleProfit-BuyingTotalCost-TransporterCost-SpecialCost;
+   CommonProfitMng := CommonProfitMng - Tax*CommonProfitMng;
+   ManagerProfit:=ManagerPercent*CommonProfit/100;
+   MainGridViewSaleProfit.EditValue:=SalePrice*SaleVolume;
+   MainGridViewManagerProfit.EditValue:=ManagerProfit;
+   MainGridViewCommonProfit.EditValue:=roundto(CommonProfit,-2);
+   MainGridViewCommonProfitMng.EditValue:=roundto(CommonProfitMng,-2);
+   //MainGridViewTransporterCost.EditValue:=TransporterCost;
+
+   if (SalePrice<>0) and (SaleVolume<>0) then
+    MainGridViewRentReal.EditValue:=round(CommonProfit*10000/(SalePrice*SaleVolume))/100
+  else
+    MainGridViewRentReal.EditValue:=0;
+
+  if (SalePrice<>0) and (SaleVolume<>0) then
+    MainGridViewRent.EditValue:=round(CommonProfitMng*10000/(SalePrice*SaleVolume))/100
+  else
+    MainGridViewRent.EditValue:=0;
+
+  end;
 
   MainGridView.DataController.PostEditingData;
 end;

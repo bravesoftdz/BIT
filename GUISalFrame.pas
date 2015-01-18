@@ -127,11 +127,8 @@ begin
 end;
 
 procedure TSalFrame.dxBarButton1Click(Sender: TObject);
-var BD,ED:TDateTime;
 begin
   try
-    BD:=StrToDateTime(DateTimeToStr(now)+' 00:00:00');
-    ED:=StrToDateTime(DateTimeToStr(now)+' 23:59:59');
     SalView.DataController.Filter.Root.Clear;
     SalView.DataController.Filter.Root.AddItem(SalViewSalaryDate,foLessEqual,now,'');
     SalView.DataController.Filter.Active:=True;
@@ -157,7 +154,6 @@ begin
 end;
 
 procedure TSalFrame.InsertVTransactBtnClick(Sender: TObject);
-var RecCount,RecIndex:integer;
 begin
    try
       SalView.DataController.Insert;

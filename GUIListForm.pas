@@ -82,14 +82,14 @@ type
     procedure UserTypesViewUserTypeNamePropertiesChange(Sender: TObject);
   private
     InputIndex:integer;
-    function CheckOrg(OrgID: integer):boolean;
-    function CheckMaterial(MatID: integer): boolean;
-    function CheckUser(UserID: integer): boolean;
-    function CheckMatgroup(MatGroupID: integer): boolean;
-    function CheckTransporter(TranspID: integer): boolean;
-    function CheckPlace(PlaceID: integer): boolean;
-    function CheckVMaterials(MatID: integer): boolean;
-    function CheckUserTypes(UserTypeID: integer): boolean;
+    procedure CheckOrg(OrgID: integer);
+    procedure CheckMaterial(MatID: integer);
+    procedure CheckUser(UserID: integer);
+    procedure CheckMatgroup(MatGroupID: integer);
+    procedure CheckTransporter(TranspID: integer);
+    procedure CheckPlace(PlaceID: integer);
+    procedure CheckVMaterials(MatID: integer);
+    procedure CheckUserTypes(UserTypeID: integer);
   public
     function ShowOrganization(id:integer):integer;
     function ShowUsers(id:integer):integer;
@@ -140,7 +140,7 @@ begin
 
 end;
 
-function TListForm.CheckOrg(OrgID: integer): boolean;
+procedure TListForm.CheckOrg(OrgID: integer);
 var QR:TADOQuery;
 begin
   if OrgID=1 then
@@ -164,7 +164,7 @@ begin
   end;
 end;
 
-function TListForm.CheckMaterial(MatID: integer): boolean;
+procedure TListForm.CheckMaterial(MatID: integer);
 var QR:TADOQuery;
 begin
     QR:=TADOQuery.Create(self);
@@ -183,7 +183,7 @@ begin
     end;
 end;
 
-function TListForm.CheckUser(UserID: integer): boolean;
+procedure TListForm.CheckUser(UserID: integer);
 var QR:TADOQuery;
 begin
   QR:=TADOQuery.Create(self);
@@ -202,7 +202,7 @@ begin
   end;
 end;
 
-function TListForm.CheckUserTypes(UserTypeID: integer): boolean;
+procedure TListForm.CheckUserTypes(UserTypeID: integer);
 var QR:TADOQuery;
 begin
   QR:=TADOQuery.Create(self);
@@ -224,7 +224,7 @@ begin
   end;
 end;
 
-function TListForm.CheckVMaterials(MatID: integer): boolean;
+procedure TListForm.CheckVMaterials(MatID: integer);
 var QR:TADOQuery;
 begin
   QR:=TADOQuery.Create(self);
@@ -243,7 +243,7 @@ begin
   end;
 end;
 
-function TListForm.CheckMatgroup(MatGroupID: integer): boolean;  /// спросить, удалить всё равно,
+procedure TListForm.CheckMatgroup(MatGroupID: integer);  /// спросить, удалить всё равно,
 //если нет то проверить в главной таблице, есть ли материалы с таким груп ИД
 var QR:TADOQuery;
 begin
@@ -263,7 +263,7 @@ begin
   end;
 end;
 
-function TListForm.CheckTransporter(TranspID: integer): boolean;
+procedure TListForm.CheckTransporter(TranspID: integer);
 var QR:TADOQuery;
 begin
   QR:=TADOQuery.Create(self);
@@ -282,7 +282,7 @@ begin
   end;
 end;
 
-function TListForm.CheckPlace(PlaceID: integer): boolean;
+procedure TListForm.CheckPlace(PlaceID: integer);
 var QR:TADOQuery;
 begin
   QR:=TADOQuery.Create(self);
@@ -429,6 +429,7 @@ function TListForm.ShowMaterials(GroupID,id: integer): integer;
 var i:integer;
     focused:boolean;
 begin
+   Result:=0;
    try
      InputIndex:=GroupID;
      MainDM.MaterialsQuery.Close;
@@ -459,7 +460,6 @@ begin
          end;
          inc(i);
        end;
-     Result:=0;
      if showModal=mrOK then
          if MaterialsView.DataController.FocusedRecordIndex>-1 then
            Result:=MaterialsView.DataController.Values[MaterialsView.DataController.FocusedRecordIndex,0]
@@ -473,6 +473,7 @@ function TListForm.ShowMatGroups(id: integer): integer;
 var i:integer;
     focused:boolean;
 begin
+   Result:=0;
    try
      InputIndex:=id;
      MainDM.MatGroupsQR.Close;
@@ -494,7 +495,6 @@ begin
          end;
          inc(i);
        end;
-     Result:=0;
      if showModal=mrOK then
         if MatGroupsView.DataController.RecordCount>0 then
            Result:=MatGroupsView.DataController.Values[MatGroupsView.DataController.FocusedRecordIndex,0]
@@ -508,6 +508,7 @@ function TListForm.ShowOrganization(id: integer): integer;
 var i:integer;
     focused:boolean;
 begin
+   Result:=0;
    try
      InputIndex:=id;
      MainDM.OrganizationsQuery.Close;
@@ -538,9 +539,8 @@ begin
          inc(i);
        end;
      if showModal=mrOK then
-        Result:=OrgView.DataController.Values[OrgView.DataController.FocusedRecordIndex,0]
-     else
-        Result:=0;
+        Result:=OrgView.DataController.Values[OrgView.DataController.FocusedRecordIndex,0];
+
    except
      on e:exception do
      MainDM.MessageForm.ShowError('Невозможно отобразить справочник. Ошибка: '+e.message);
@@ -551,6 +551,7 @@ function TListForm.ShowPlaces(id: integer): integer;
 var i:integer;
     focused:boolean;
 begin
+   Result:=0;
    try
      InputIndex:=id;
      MainDM.PlacesQuery.Close;
@@ -573,9 +574,8 @@ begin
          inc(i);
        end;
      if showModal=mrOK then
-        Result:=PlacesView.DataController.Values[PlacesView.DataController.FocusedRecordIndex,0]
-     else
-        Result:=0;
+        Result:=PlacesView.DataController.Values[PlacesView.DataController.FocusedRecordIndex,0];
+
    except
      on e:exception do
      MainDM.MessageForm.ShowError('Невозможно отобразить справочник. Ошибка: '+e.message);
@@ -586,6 +586,7 @@ function TListForm.ShowTransporters(id: integer): integer;
 var i:integer;
     focused:boolean;
 begin
+   Result:=0;
    try
      InputIndex:=id;
      MainDM.TransportersQuery.Close;
@@ -608,9 +609,8 @@ begin
          inc(i);
        end;
      if showModal=mrOK then
-        Result:=TransporterView.DataController.Values[TransporterView.DataController.FocusedRecordIndex,0]
-     else
-        Result:=0;
+        Result:=TransporterView.DataController.Values[TransporterView.DataController.FocusedRecordIndex,0];
+
    except
      on e:exception do
      MainDM.MessageForm.ShowError('Невозможно отобразить справочник. Ошибка: '+e.message);
@@ -621,6 +621,7 @@ function TListForm.ShowUsers(id: integer): integer;
 var i:integer;
     focused:boolean;
 begin
+  Result:=0;
   try
      InputIndex:=id;
      MainDM.UsersQuery.Close;
@@ -643,9 +644,7 @@ begin
          inc(i);
        end;
      if showModal=mrOK then
-        Result:=UsersView.DataController.Values[UsersView.DataController.FocusedRecordIndex,0]
-     else
-        Result:=0;
+        Result:=UsersView.DataController.Values[UsersView.DataController.FocusedRecordIndex,0];
    except
      on e:exception do
      MainDM.MessageForm.ShowError('Невозможно отобразить справочник. Ошибка: '+e.message);
@@ -656,6 +655,7 @@ function TListForm.ShowUserTypes(id: integer): integer;
 var i:integer;
     focused:boolean;
 begin
+  Result:=0;
   try
      InputIndex:=id;
      MainDM.UsertypesQR.Close;
@@ -678,9 +678,8 @@ begin
          inc(i);
        end;
      if showModal=mrOK then
-        Result:=UserTypesView.DataController.Values[UserTypesView.DataController.FocusedRecordIndex,0]
-     else
-        Result:=0;
+        Result:=UserTypesView.DataController.Values[UserTypesView.DataController.FocusedRecordIndex,0];
+
    except
      on e:exception do
      MainDM.MessageForm.ShowError('Невозможно отобразить справочник. Ошибка: '+e.message);
@@ -691,6 +690,7 @@ function TListForm.ShowVMaterials(id: integer): integer;
 var i:integer;
     focused:boolean;
 begin
+   Result:=0;
    try
      InputIndex:=id;
      MainDM.VMaterialsQR.Close;
@@ -713,9 +713,7 @@ begin
          inc(i);
        end;
      if showModal=mrOK then
-        Result:=VMaterialsView.DataController.Values[VMaterialsView.DataController.FocusedRecordIndex,0]
-     else
-        Result:=0;
+        Result:=VMaterialsView.DataController.Values[VMaterialsView.DataController.FocusedRecordIndex,0];
    except
      on e:exception do
      MainDM.MessageForm.ShowError('Невозможно отобразить справочник. Ошибка: '+e.message);

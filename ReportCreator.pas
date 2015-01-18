@@ -122,10 +122,10 @@ begin
 end;
 
 procedure TReportCreator.CreatePoint5Report(BeginDate, EndDate: TDateTime);
-var itemindex:integer;
+{var itemindex:integer;
     OrgID:integer;
     Point5ReportQR:TADOQuery;
-    RepForm:TPoint5ReportForm;
+    RepForm:TPoint5ReportForm; }
 begin
  {  RepForm:=TPoint5ReportForm.Create(nil);
    try
@@ -330,9 +330,9 @@ begin
 end;
 
 procedure TReportCreator.CreateCrossReport(BeginDate,EndDate:TDateTime);
-var itemindex:integer;
+{var itemindex:integer;
     OrgID:integer;
-    CrossReportQR:TADOQuery;
+    CrossReportQR:TADOQuery;}
 begin
  {  ReportForm:=TReportForm.Create(nil);
    try
@@ -378,7 +378,6 @@ end;
 
 procedure TReportCreator.CreateExpensesReport(BeginDate, EndDate: TDateTime);
 var itemindex:integer;
-    OrgID:integer;
     ExpReportQR:TADOQuery;
     PeriodForm:TPoint5ReportForm;
 begin
@@ -422,7 +421,6 @@ end;
 
 procedure TReportCreator.CreateFinExpReport(BeginDate, EndDate: TDateTime);
 var itemindex:integer;
-    OrgID:integer;
     ExpReportQR:TADOQuery;
     PeriodForm:TPoint5ReportForm;
 begin
@@ -466,7 +464,6 @@ end;
 
 procedure TReportCreator.CreateInvExpReport(BeginDate, EndDate: TDateTime);
 var itemindex:integer;
-    OrgID:integer;
     ExpReportQR:TADOQuery;
     PeriodForm:TPoint5ReportForm;
 begin
@@ -682,7 +679,6 @@ end;
 
 procedure TReportCreator.CreateSalaryReport(BeginDate, EndDate: TDateTime);
 var itemindex:integer;
-    OrgID:integer;
     ExpReportQR:TADOQuery;
     PeriodForm:TAVGReportForm;
     AVGMonth:boolean;
@@ -890,9 +886,7 @@ end;
 
 
 procedure TReportCreator.CreateSumExpGraph(BeginDate, EndDate: TDateTime);
-var itemindex:integer;
-    OrgID:integer;
-    PeriodForm:TPoint5ReportForm;
+var PeriodForm:TPoint5ReportForm;
 begin
    PeriodForm:=TPoint5ReportForm.Create(nil);
    try
@@ -928,7 +922,6 @@ begin
 end;
 procedure TReportCreator.CreateSumExpReport(BeginDate, EndDate: TDateTime);
 var itemindex:integer;
-    OrgID:integer;
     PeriodForm:TPoint5ReportForm;
 begin
    PeriodForm:=TPoint5ReportForm.Create(nil);

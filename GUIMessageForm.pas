@@ -53,7 +53,6 @@ implementation
 { TMessageForm }
 
 procedure TMessageForm.BitBtn1Click(Sender: TObject);
-var subject:string;
 begin
    ShellExecute(Handle, nil, PWideChar('mailto:savina.marina@yahoo.com?subject=ахр&body='+FMailText),
    nil, nil, SW_RESTORE);
