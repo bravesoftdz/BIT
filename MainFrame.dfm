@@ -38,6 +38,11 @@ object MainDataFrame: TMainDataFrame
         item
           Kind = skSum
           Column = MainGridViewSaleProfit
+        end
+        item
+          Format = '0'
+          Kind = skAverage
+          Column = MainGridViewRent
         end>
       DataController.Summary.SummaryGroups = <>
       NewItemRow.InfoText = #1065#1077#1083#1082#1085#1080#1090#1077' '#1079#1076#1077#1089#1100' '#1076#1083#1103' '#1076#1086#1073#1072#1074#1083#1077#1085#1080#1103' '#1085#1086#1074#1086#1081' '#1079#1072#1087#1080#1089#1080
@@ -69,6 +74,7 @@ object MainDataFrame: TMainDataFrame
             Value = False
           end>
         Properties.LargeImages = cxImageList1
+        Properties.ReadOnly = True
         Properties.ShowDescriptions = False
       end
       object MainGridViewID: TcxGridDBColumn
@@ -316,7 +322,6 @@ object MainDataFrame: TMainDataFrame
         Properties.OnEditValueChanged = MainGridViewManagerIDPropertiesEditValueChanged
         RepositoryItem = MainDM.UsersRepository
         HeaderAlignmentHorz = taCenter
-        Options.Filtering = False
         Width = 60
       end
       object MainGridViewManagerPercent: TcxGridDBColumn

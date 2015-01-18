@@ -75,10 +75,11 @@ object MainForm: TMainForm
                 item
                   Kind = skSum
                   Column = MainDataFrame.MainGridViewSaleProfit
+                end
+                item
+                  Kind = skAverage
+                  Column = MainDataFrame.MainGridViewRent
                 end>
-              inherited MainGridViewTransactDate: TcxGridDBColumn
-                Properties.OnEditValueChanged = nil
-              end
             end
           end
           inherited dxBarManager1: TdxBarManager
